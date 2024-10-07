@@ -11,6 +11,8 @@ services:
   backend:
     image: etobrexnya/taski_backend
     env_file: .env
+    depends_on:
+      - db
     volumes:
       - static_volume:/backend_static
   frontend:
@@ -19,6 +21,8 @@ services:
     command: cp -r /app/build/. /frontend_static/
     volumes:
       - static_volume:/frontend_static
+    depends_on:
+      - backend
   gateway:
     image: etobrexnya/taski_gateway
     env_file: .env
